@@ -644,10 +644,27 @@
       A Singleton is an object which can only be instantiated one time. Repeated calls to its constructor return the same instance. This way one can ensure that they don't accidentally create multiple instances.
 
       ```javascript
-      var object = new (function () {
-        this.name = "Sudheer";
-      })();
-      ```
+      const Singleton = (function () {
+      let instance; // Private variable to store the instance
+
+      function createInstance() {
+        return { name: "Sudheer" };
+      }
+
+      return {
+        getInstance: function () {
+          if (!instance) {
+            instance = createInstance();
+          }
+          return instance;
+        },
+      };
+    })();
+      const obj1 = Singleton.getInstance();
+      const obj2 = Singleton.getInstance();
+
+      console.log(obj1 === obj2);
+     ```
 
       **[⬆ Back to Top](#table-of-contents)**
 
